@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Método de la Secante</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="secant">
+            <div>
+              <label> <var>f(x)</var></label>
+              <input id="f" name="f" type="text" placeholder="x*x-2" onkeyup="pass_value('f');" />
+            </div>
+            <div>
+              <small id="error0"></small>
+            </div>
+            <div>
+              <label> <var>x<sub>0</sub></var></label>
+              <input id="x0" name="x0" type="text" placeholder="1" onkeyup="pass_value('x0');" />
+            </div>
+            <div>
+              <small id="error1"></small>
+            </div>
+            <div>
+              <label> <var>x<sub>1</sub></var></label>
+              <input id="x1" name="x1" type="text" placeholder="4" onkeyup="pass_value('x1');" />
+            </div>
+            <div>
+              <small id="error2"></small>
+            </div>
+            <div>
+              <label> <var>tol</var></label>
+              <input id="tol" name="tol" type="text" placeholder="0.0001" onkeyup="pass_value('tol');" />
+            </div>
+            <div>
+              <small id="error3"></small>
+            </div>
+            <div class="row-group"><input value="Calcular" onclick="root_secant('x',f.value);" type="button" /></div>
+          </form>
+        </section>
+        <section id="result">
+          <h6>&nbsp;</h6>
+          <span id="demo"></span>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Descripción</label></h3>
+          <div class="hidden">
+            <p>Recordemos que la iteración de Newton está definida por la ecuación</p>
+            <div class="equation">
+              x<sub>n</sub> = x<sub>n - 1</sub> −
+              <div class="fraction"><span>f(x<sub>n - 1</sub>)</span>
+                <hr /><span>f '(x<sub>n - 1</sub>)</span>
+              </div>,&nbsp;n &ge; 1.
+            </div>
+            <p>El método de Newton es una técnica extremadamente potente, pero tiene una gran debilidad: la necesidad
+              de conocer el valor de la derivada de <var>f</var> en cada aproximación.
+              Con frecuencia, <var>f '(x)</var> es mucho más difícil y necesita más operaciones aritméticas para
+              calcularse que
+              <var>f(x)</var>.
+            </p>
+            <p>Para evitar el problema de la evaluación de la derivada en el método de Newton, reemplazamos
+              <var>f '(x)</var> por un cociente de diferencias, dado por
+            </p>
+            <div class="equation">
+              f '(x<sub>n</sub>) &asymp;
+              <div class="fraction">
+                <span>f(x<sub>n</sub>) - f(x<sub>n-1</sub>)</span>
+                <hr />
+                <span>x<sub>n</sub> - x<sub>n-1</sub></span>
+              </div>.
+            </div>
+            <p>Usando esta aproximación de <var>f'(x<sub>n</sub>)</var> en la fórmula de Newton obtenemos</p>
+            <div class="equation">
+              x<sub>n+1</sub> = x<sub>n</sub> - f(x<sub>n </sub>)
+              <div class="fraction">
+                <span>(x<sub>n</sub> - x<sub>n - 1</sub>)</span>
+                <hr />
+                <span>f(x<sub>n</sub>) - f(x<sub>n - 1</sub>)</span>
+              </div>,&nbsp;n &ge; 1.
+            </div>
+            <p>Esta técnica se llama el método de la Secante. Como el cálculo de <var>x<sub>n + 1</sub></var> requiere
+              <var>x<sub>n</sub></var> y <var>x<sub>n - 1</sub></var>, hay que prescribir dos puntos iniciales al
+              principio.
+              Sin embargo, cada nuevo <var>x<sub>n + 1</sub></var> requiere solo una nueva evaluación de <var>f</var>.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a class="select" href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="secondary">
+          <figure>
+            <img src="img/secant.png" width="334" height="321" alt="secant">
+            <figcaption>
+              Secante
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/validate_root.js"></script>
+  <script src="js/root-secant.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="fabio" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Interpolación de Neville's</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="neville">
+            <div>
+              <label><var>x</var></label>
+              <input id="x" name="x" type="text" placeholder="0 2 3" onkeyup="pass_value('x');" />
+            </div>
+            <div>
+              <small id="error1"></small>
+            </div>
+            <div>
+              <label><var>y</var></label>
+              <input id="y" name="y" type="text" placeholder="7 11 28" onkeyup="pass_value('y');" />
+            </div>
+            <div>
+              <small id="error2"></small>
+            </div>
+            <div>
+              <label><var>x<sub>0</sub></var></label>
+              <input id="z" name="z" type="text" placeholder="1" onkeyup="pass_value('z');" />
+            </div>
+            <div>
+              <small id="error3"></small>
+            </div>
+            <div class="row-group">
+              <input type="button" value="Interpolar" onclick="int_neville();" />
+            </div>
+          </form>
+          <span id="tab"></span>
+        </section>
+        <section id="result">
+          <h6>&nbsp;</h6>
+          <span id="demo"></span>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Descripción</label></h3>
+          <div class="hidden">
+            <p>El método de interpolación de Newton implica dos pasos: el cálculo de los coeficientes, seguido por la
+              evaluación del polinomio.
+              Esto funciona bien si la interpolación se lleva a cabo varias veces a diferentes valores de <var>x</var>
+              utilizando el mismo polinomio.
+              Si sólo hay un punto a interpolar, un método que calcula el interpolador en un solo paso, es el algoritmo
+              de Neville.</p>
+            <p>Sea <var>P<sub>k</sub>[x<sub>i</sub>, x<sub>i+1</sub>,&#8230;,x<sub>i+k</sub>]</var> denota el polinomio
+              de grado <var>k</var> que pasa a través de los <var>k+1</var> puntos
+              <var>(x<sub>i</sub>,y<sub>i</sub>),
+                (x<sub>i+1</sub>,y<sub>i+1</sub>),&#8230;,(x<sub>i+k</sub>,y<sub>i+k</sub>)</var>. Para un solo punto,
+              tenemos.
+            </p>
+            <div class="equation">P<sub>0</sub>[x<sub>i</sub>] = y<sub>i</sub>.
+            </div>
+            <p>El interpolante basado en dos puntos es</p>
+            <div class="equation">
+              P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>] =
+              <div class="fraction"><span>P<sub>0</sub>[x<sub>i+1</sub>](x - x<sub>i</sub>) -
+                  P<sub>0</sub>[x<sub>i</sub>](x - x<sub>i+1</sub>)</span>
+                <hr /><span>x<sub>i+1</sub> - x<sub>i</sub></span>
+              </div>.
+            </div>
+            <p>Es fácil verificar que <var>P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>] = y<sub>i</sub></var> cuando
+              <var>x = x<sub>i</sub></var>, y
+              <var>P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>] = y<sub>i+1</sub></var> cuando <var>x =
+                x<sub>i+1</sub></var>.
+            </p>
+            <p>El interpolante de tres puntos es</p>
+            <div class="equation">
+              P<sub>2</sub>[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>] =
+              <div class="fraction"><span>P<sub>1</sub>[x<sub>i+1</sub>,x<sub>i+2</sub>](x - x<sub>i</sub>) -
+                  P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>](x - x<sub>i+2</sub>)</span>
+                <hr /><span>x<sub>i+2</sub> - x<sub>i</sub></span>
+              </div>.
+            </div>
+            <p>De igual forma, substituyendo <var>x = x<sub>i</sub></var>, obtenemos</p>
+            <div class="equation">
+              P<sub>2</sub>[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>] =
+              P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>] = y<sub>i</sub>.
+            </div>
+            <p>Similarmente, cuando <var>x = x<sub>i+2</sub></var> resulta</p>
+            <div class="equation">
+              P<sub>2</sub>[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>] =
+              P<sub>1</sub>[x<sub>i+1</sub>,x<sub>i+2</sub>] = y<sub>i+2</sub>.
+            </div>
+            <p>Finalmente, cuando <var>x = x<sub>i+2</sub></var> tenemos</p>
+            <div class="equation">
+              P<sub>1</sub>[x<sub>i</sub>,x<sub>i+1</sub>] = P<sub>1</sub>[x<sub>i+1</sub>,x<sub>i+2</sub>] =
+              y<sub>i+1</sub>,
+            </div>
+            <p>es decir,</p>
+            <div class="equation">
+              P<sub>2</sub>[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>] = y<sub>i+1</sub>.
+            </div>
+            <p>Ahora, teneiendo establecido ciertos patrones, podemos deducir la fórmula general recursiva:</p>
+            <div class="equation">
+              P<sub>k</sub>[x<sub>i</sub>,&#8230;,x<sub>i+k</sub>] =
+              <div class="fraction"><span>P<sub>k-1</sub>[x<sub>i+1</sub>,&#8230;,x<sub>i+k</sub>](x -
+                  x<sub>i</sub>)</span>
+                <hr />
+                <span>x<sub>i+k</sub> - x<sub>i</sub></span>
+              </div> -
+              <div class="fraction"><span>P<sub>k-1</sub>[x<sub>i</sub>,&#8230;,x<sub>i+k-1</sub>](x -
+                  x<sub>i+k</sub>)</span>
+                <hr />
+                <span>x<sub>i+k</sub> - x<sub>i</sub></span>
+              </div>.
+            </div>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: none;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: block;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a class="select" href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup>orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/validate_interpolation.js"></script>
+  <script src="js/int-neville.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+ 
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a class="active" href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Conjunto de Cantor</h2>
+        <section>
+          <h3>Programa</h3>
+          <form>
+            <div>
+              Fractal
+              <select id="tipo">
+                <option> Conjunto de Cantor </option>
+                <option> Triángulo de Cantor </option>
+                <option> Cuadrado de Cantor </option>
+              </select>
+            </div>
+            <div>
+              Nivel
+              <select id="nivel">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <input type="button" onclick="draw();" value="Dibujar" />
+          </form>
+          <canvas id="canvas" height="300" width="300"></canvas>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Construcción</label></h3>
+          <div class="hidden">
+            <ol>
+              <li>Comience con el intervalo cerrado <var>[0,1]</var>.
+                <figure>
+                  <svg width="270" height="5">
+                    <defs>
+                      <polygon id="carpet1" points="0,0 270,0 270,5 0,5" fill="black" />
+                    </defs>
+                    <use xlink:href="#carpet1" />
+                  </svg>
+                </figure>
+              </li>
+              <li>Ahora retire el intervalo abierto <var>(1/3,2/3)</var>, es decir, retire el tercio medio de
+                <var>[0,1]</var>,
+                pero no los números <var>1/3</var> y <var>2/3</var>.
+              </li>
+              <li>Esto deja dos intervalos <var>[0, 1/3]</var> y <var>[2/3,1]</var> de longitud <var>1/3</var> cada
+                uno y esto completa una etapa básica de la construcción.
+                <figure>
+                  <svg width="270" height="5">
+                    <defs>
+                      <polygon id="cantor" points="0,0 270,0 270,5 0,5" fill="black" />
+                      <g id="Image1">
+                        <use xlink:href="#cantor" transform="translate(0,0) scale(0.3333,1)" />
+                        <use xlink:href="#cantor" transform="translate(180,0) scale(0.3333,1)" />
+                      </g>
+                    </defs>
+                    <use xlink:href="#Image1" />
+                  </svg>
+                </figure>
+              </li>
+              <li>Ahora repitamos, observamos los intervalos restantes <var>[0,1/3]</var> y <var>[2/3,1]</var>
+                y remueva sus tercios medios, lo que produce cuatro intervalos de longitud <var>1/9</var>.
+                <figure>
+                  <svg width="270" height="5">
+                    <defs>
+                      <polygon id="cantor1" points="0,0 270,0 270,5 0,5" fill="black" />
+                      <g id="image1">
+                        <use xlink:href="#cantor1" transform="translate(0,0) scale(0.3333,1)" />
+                        <use xlink:href="#cantor1" transform="translate(180,0) scale(0.3333,1)" />
+                      </g>
+                      <g id="image2">
+                        <use xlink:href="#image1" transform="translate(0,0) scale(0.3333,1)" />
+                        <use xlink:href="#image1" transform="translate(180,0) scale(0.3333,1)" />
+                      </g>
+                    </defs>
+                    <use xlink:href="#image2" />
+                  </svg>
+                </figure>
+              </li>
+              <li>Continúe de esta manera. En otras palabras, hay un proceso de retroalimentación
+                en el que se genera una secuencia de intervalos cerrados.</li>
+            </ol>
+            <h3>El tamaño total del conjunto Cantor es cero</h3>
+            <p>Esto es fácil de mostrar: en la etapa uno, la longitud total es 1. En la etapa 2 es 1/3+1/3 = 2/3.
+              En la etapa 3, la longitud es <var>4/9=(2/3)<sup>2</sup></var>, y en la etapa <var>n</var> es
+              <var>(2/3)<sup>n-1</sup></var>. Cuando <var>n &rarr; &infin;</var> esto tiende
+              a cero. Por lo tanto, la longitud acumulativa total del conjunto de Cantor es cero.
+            </p>
+          </div>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-2" />
+          <h3><label for="option-2">Variantes del Conjunto de Cantor</label></h3>
+          <div class="hidden">
+            <h4>Cuadrado de Cantor</h4>
+            <div>
+              La idea básica para elaborar el conjunto de Cantor a partir de un segmento es: dividir el segmento en tres
+              partes iguales y suprimir la parte central.
+              Realiza las siguientes instrucciones:
+              <ol>
+                <li>Dibuja un cuadrado de 1 cm de lado.</li>
+                <li>Sobre cada uno de los lados aplica la construcción básica para el conjunto de Cantor.</li>
+                <li>Con cada par de segmentos que forman las esquinas construye un cuadrado.</li>
+                <li>En cada uno de los cuadrados de la esquina realiza nuevamente los pasos 1 y 2.</li>
+                <li>Describe la figura que se obtendría de continuar indefinidamente con este procedimiento.</li>
+              </ol>
+              <figure>
+                <img src="img/cantor-square.png" width="228" height="105" alt="cantor" />
+                <figcaption>Cuadrado de Cantor</figcaption>
+              </figure>
+            </div>
+            <h4>Triángulo de Cantor</h4>
+            <div>
+              Dibuja un triángulo equilátero (1 cm de lado) y sobre cada uno de los lados aplica la construcción básica
+              de
+              Cantor. En cada vértice, con el par de segmentos formados, completa un triángulo. Repite el proceso sobre
+              cada
+              uno de estos triángulos generados en las esquinas. Al terminar, vuelve a aplicar la construcción básica
+              sobre
+              cada uno de los nuevos triángulos.
+              <figure>
+                <img src="img/cantor-tri.png" width="256" height="105" alt="cantor" />
+                <figcaption>Triángulo de Cantor</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Fractales Lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a class="select" href="frac-cantor.html">Cantor</a></li>
+                <li><a href="frac-koch.html">Von Koch</a></li>
+                <li><a href="frac-sierpinski.html">Sierpinski</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Fractales no Lineales<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="frac-julia.html">Conjunto de Julia</a></li>
+                <li><a href="frac-mandelbrot.html">Conjunto de Mandelbrot</a></li>
+                <li><a href="frac-newton.html">Método de Newton</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/frac-cantor.js"></script>
+</body>
+
+</html>

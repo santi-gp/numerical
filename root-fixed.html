@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Método del punto fijo</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="fixed">
+            <div>
+              <label> <var>f(x)</var></label>
+              <input id="f" name="f" type="text" placeholder="sqrt(5*x-3)" onkeyup="pass_value('f');"  />
+            </div>
+            <div>
+              <small id="error0"></small>
+            </div>
+            <div>
+              <label> <var>x</var></label>
+              <input id="x1" name="x1" type="text" placeholder="2.5" onkeyup="pass_value('x1');"  />
+            </div>
+            <div>
+              <small id="error2"></small>
+            </div>
+            <div>
+              <label> <var>tol</var></label>
+              <input id="tol" name="tol" type="text" placeholder="0.0001" onkeyup="pass_value('tol');"  />
+            </div>
+            <div>
+              <small id="error3"></small>
+            </div>
+            <div>
+              <label> <var>n</var></label>
+              <input id="n" name="n" type="text" placeholder="20" onkeyup="pass_value('n');"  />
+            </div>
+            <div>
+              <small id="error4"></small>
+            </div>
+            <div class="row-group"><input value="Calcular" onclick="root_fixed('x',f.value);" type="button" /></div>
+          </form>
+        </section>
+        <section id="result">
+          <h6>&nbsp;</h6>
+          <span id="demo"></span>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Definición</label></h3>
+          <div class="hidden">
+            <p>El número <var>p</var> es un punto fijo para una función <var>f</var> si <var>f(p) = p</var>.</p>
+            <p>Dado un problema de raíz <var>f(p) = 0</var>, definimos la función <var>g</var> con un punto fijo en
+              <var>p</var> de la siguiente manera
+            </p>
+            <div class="equation">g(x) = x - f(x).</div>
+            <p>A la inversa, si la función <var>g</var> tiene un punto fijo en <var>p</var>, entonces la función
+              definida por</p>
+            <div class="equation">f(x) = x - g(x)</div>
+            <p>tiene un cero en <var>p</var>.</p>
+          </div>
+          <input type="checkbox" name="group" id="option-2" />
+          <h3><label for="option-2">Descripción</label></h3>
+          <div class="hidden">
+            <p>Para aproximar el punto fijo de una función <var>g</var>, elegimos una aproximación inicial
+              <var>x<sub>0</sub></var> y generamos la secuencia
+              <var>{x<sub>n</sub>}<sub>n=0</sub><sup>&infin;</sup></var> dada por
+            </p>
+            <div class="equation">
+              x<sub>n</sub> = g(x<sub>n - 1</sub>),&nbsp; &forall; n &ge; 1.
+            </div>
+            <p>Si la secuencia converge a <var>p</var> y <var>g</var> es continua, entonces</p>
+            <div class="equation">
+              p = <div class="lim">
+                <span class="up">lim</span>
+                <span class="down">n &rarr;&infin;</span>
+              </div>x<sub>n</sub> =
+              <div class="lim">
+                <span class="up">lim</span>
+                <span class="down">n &rarr;&infin;</span>
+              </div>g(x<sub>n</sub>) =
+              g(<div class="lim">
+                <span class="up">lim</span>
+                <span class="down">n &rarr;&infin;</span>
+              </div>x<sub>n</sub>) = g(p)
+            </div>
+            <p>y se obtiene una solución a <var>x=g(x)</var>. Esta técnica se denomina punto fijo, o iteración
+              funcional.</p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a class="select" href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="secondary">
+          <figure>
+            <img src="img/fixed.png" width="359" height="307" alt="fixed point">
+            <figcaption>
+              Punto fijo
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/validate_root.js"></script>
+  <script src="js/root-fixed.js"></script>
+</body>
+
+</html>

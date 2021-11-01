@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Interpolación de Newton</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="newton">
+            <div>
+              <label><var>x</var></label>
+              <input id="x" name="x" type="text" placeholder="0 2 3 4"  onkeyup="pass_value('x');" />
+            </div>
+            <div>
+              <small id="error1"></small>
+            </div>
+            <div>
+              <label><var>y</var></label>
+              <input id="y" name="y" type="text" placeholder="7 11 28 15" onkeyup="pass_value('y');" />
+            </div>
+            <div>
+              <small id="error2"></small>
+            </div>
+            <div class="row-group">
+              <input type="button" value="Interpolar" onclick="int_newton();" />
+            </div>
+          </form>
+          <span id="tab"></span>
+        </section>
+        <section id="result">
+          <h6>&nbsp;</h6>
+          <span id="demo"></span>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Descripción</label></h3>
+          <div class="hidden">
+            <p>Supongamos que <var>P<sub>n</sub>(x)</var> es el enésimo polinomio de Lagrange de la función <var>f</var>
+              en los puntos <var>x<sub>0</sub>,x<sub>1</sub>,...,x<sub>n</sub></var>.
+              Aunque este polinomio es único, existen representaciones algebraicas alternas que son útiles en ciertas
+              situaciones. Las diferencias divididas de <var>f</var>
+              con respecto a <var>x<sub>0</sub>,x<sub>1</sub>,...,x<sub>n</sub></var> se utilizan para expresar
+              <var>P<sub>n</sub>(x)</var> en la forma.
+            </p>
+            <div class="equation">
+              P<sub>n</sub>(x) = a<sub>0</sub> + a<sub>1</sub>(x - x<sub>0</sub>) + a<sub>2</sub>(x - x<sub>0</sub>)(x −
+              x<sub>1</sub>) + ... + a<sub>n</sub>(x - x<sub>0</sub>)...(x - x<sub>n-1</sub>),
+            </div>
+            <p>con las constantes apropiadas, <var>a<sub>0</sub>,a<sub>1</sub>,...,a<sub>n</sub></var>. Para determinar
+              la primera de estas constantes, <var>a<sub>0</sub></var>, tenga en cuenta que si
+              <var>P<sub>n</sub>(x)</var> se escribe en la forma de la ecuación anterior, entonces la evaluación de
+              <var>P<sub>n</sub>(x)</var> en <var>x<sub>0</sub></var> deja sólo el
+              término constante <var>a<sub>0</sub></var>; es decir,
+            </p>
+            <div class="equation">
+              a<sub>0</sub> = P<sub>n</sub>(x<sub>0</sub>) = f(x<sub>0</sub>).
+            </div>
+            <p>Del mismo modo, cuando <var>P<sub>n</sub>(x)</var> se evalúa en <var>x<sub>1</sub></var>, los únicos
+              términos no cero en la evaluación de <var>P<sub>n</sub>(x<sub>1</sub>)</var> son los términos constantes y
+              lineales,</p>
+            <div class="equation">
+              f(x<sub>0</sub>) + a<sub>1</sub>(x<sub>1</sub> - x<sub>0</sub>) = P<sub>n</sub>(x<sub>1</sub>) =
+              f(x<sub>1</sub>);
+            </div>
+            <p>Así obtenemos</p>
+            <div class="equation">
+              a<sub>1</sub> =
+              <div class="fraction"><span>f(x<sub>1</sub>) - f(x<sub>0</sub>)</span>
+                <hr /><span>x<sub>1</sub> - x<sub>0</sub></span>
+              </div>.
+            </div>
+            <p>Ahora introducimos la notación de diferencia dividida de la función <var>f</var> con respecto a
+              <var>x<sub>i</sub></var>, denominado <var>f[x<sub>i</sub>]</var>, es simplemente el valor de <var>f</var>
+              en <var>x<sub>i</sub></var>.
+            </p>
+            <p>La primera diferencia dividida finita con respecto a <var>x<sub>i</sub></var> y
+              <var>x<sub>i+1</sub></var> se denota como
+              <var>f[x<sub>i</sub>,x<sub>i+1</sub>]</var> y se define como
+            </p>
+            <div class="equation">
+              f[x<sub>i</sub>,x<sub>i+1</sub>] =
+              <div class="fraction"><span>f[x<sub>i+1</sub>] - f[x<sub>i</sub>]</span>
+                <hr /><span>x<sub>i+1</sub> - x<sub>i</sub></span>
+              </div>.
+            </div>
+            <p>La segunda diferencia dividida se denota por <var>f[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>]</var>
+              y se define como</p>
+            <div class="equation">
+              f[x<sub>i</sub>,x<sub>i+1</sub>,x<sub>i+2</sub>] =
+              <div class="fraction"><span>f[x<sub>i+1</sub>,x<sub>i+2</sub>] - f[x<sub>i</sub>,x<sub>i+1</sub>]</span>
+                <hr /><span>x<sub>i+2</sub> - x<sub>i</sub></span>
+              </div>.
+            </div>
+            <p>En forma similar, la n-ésima diferencia dividida finita es</p>
+            <div class="equation">
+              f[x<sub>0</sub>,x<sub>1</sub>,...,x<sub>n</sub>] =
+              <div class="fraction"><span>f[x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub> ] -
+                  f[x<sub>0</sub>,x<sub>1</sub>,...,x<sub>n-1</sub>]</span>
+                <hr /><span>x<sub>n</sub> - x<sub>0</sub></span>
+              </div>.
+            </div>
+            <p>Estas diferencias sirven para evaluar los coeficientes de <var>P<sub>n</sub>(x)</var> y así un obtener un
+              polinomio de
+              interpolación de la forma</p>
+            <div class="equation">
+              P<sub>n</sub>(x) = f(x<sub>0</sub>) + f[x<sub>0</sub>,x<sub>1</sub>](x - x<sub>0</sub>) +
+              f[x<sub>0</sub>,x<sub>1</sub>,x<sub>2</sub>](x - x<sub>0</sub>)(x - x<sub>1</sub>) + ... +
+              f[x<sub>0</sub>,x<sub>1</sub>,...,x<sub>n</sub>](x - x<sub>0</sub>)...(x - x<sub>n-1</sub>).
+            </div>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: none;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: block;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a class="select" href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/validate_interpolation.js"></script>
+  <script src="js/int-newton.js"></script>
+</body>
+
+</html>

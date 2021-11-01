@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a class="active" href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>La Curva de Koch</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="koch">
+            <div>
+              Fractal
+              <select id="tipo">
+                <option> Curva de Koch </option>
+                <option> Copo de Koch </option>
+              </select>
+            </div>
+            <div>
+              Nivel
+              <select id="nivel">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <input type="button" onclick="draw();" value="Dibujar" />
+          </form>
+          <canvas id="canvas" height="300" width="300"></canvas>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Construcción</label></h3>
+          <div class="hidden">
+            <p>Comience con una línea recta. Este objeto
+              inicial también se llama el iniciador. Divídalo en tres partes iguales. Luego reemplazar el tercio medio
+              por un
+              triángulo equilátero y quitar su base. Esto completa el paso básico de la construcción. Una reducción de
+              esta figura,
+              hecha de cuatro partes, se reutilizará en las siguientes etapas. Esta es llamada el generador. Así, ahora
+              repetimos,
+              tomando cada uno de los segmentos de línea resultantes, dividiéndolos en tres partes iguales, y así
+              sucesivamente.
+              La auto-semejanza se construye en el proceso de construcción, es decir,
+              cada una de las cuatro partes en el paso <var>k</var> es de nuevo una versión reducida - por un factor de
+              3 - de toda la curva en
+              la etapa <var>k-1</var> anterior.</p>
+            <p>En realidad, Koch quería proporcionar otro ejemplo para un descubrimiento hecho por el matemático alemán
+              Karl Weierstrass,
+              que en 1872 había precipitado una pequeña crisis en matemáticas. Había descrito una curva que no podía ser
+              diferenciada, es decir,
+              una curva que no admite una tangente en ninguno de sus puntos. La capacidad de diferenciar (es decir, de
+              calcular la pendiente de
+              una curva de un punto a otro) es una característica central del cálculo, que fue inventada
+              independientemente por Newton y Leibniz
+              unos 200 años antes de Weierstrass. La idea de pendiente es bastante intuitiva y va de la mano con la
+              noción de tangente.
+              Si una curva tiene una esquina, entonces hay un problema. No hay forma de encajar una tangente única. La
+              curva de Koch es un ejemplo
+              de una curva que en cierto sentido está hecha de esquinas por todas partes, es decir, no hay forma de
+              encajar una tangente a ninguno
+              de sus puntos.</p>
+            <p>Volvamos a la curva original de Koch y discutamos su longitud. En cada etapa obtenemos una curva. Después
+              de la primera,
+              nos quedamos con una curva que se compone de cuatro segmentos de línea de la misma longitud, después de la
+              segunda etapa que tenemos <var>4<sup>2</sup></var>,
+              y luego <var>4<sup>3</sup></var> segmentos de línea después de la tercera etapa, y así sucesivamente. Si
+              la línea original tenía longitud <var>L</var>, entonces
+              después del primer paso un segmento de línea tiene longitud <var>L&#215;1&#47;3</var>, después del segundo
+              paso tenemos <var>L&#215;1&#47;3<sup>2</sup></var>,
+              luego <var>L&#215;1&#47;3<sup>3</sup></var>, y así sucesivamente.
+              Puesto que cada una de las etapas produce una curva de segmentos de línea, no hay problema en la medición
+              de sus respectivas longitudes.
+              Después del primer paso es <var>4&#215;L&#215;1&#47;3</var>, luego
+              <var>4<sup>2</sup>&#215;L&#215;1&#47;3<sup>2</sup></var> y así sucesivamente. Después del paso
+              <var>k</var> se tiene <var>4<sup>k</sup>&#215;L&#215;1&#47;3<sup>k</sup></var>, Observamos que de paso a
+              paso la longitud de las curvas crece por un factor de <var>4&#47;3</var>.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Fractales Lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a href="frac-cantor.html">Cantor</a></li>
+                <li><a class="select" href="frac-koch.html">Von Koch</a></li>
+                <li><a href="frac-sierpinski.html">Sierpinski</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Fractales no Lineales<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="frac-julia.html">Conjunto de Julia</a></li>
+                <li><a href="frac-mandelbrot.html">Conjunto de Mandelbrot</a></li>
+                <li><a href="frac-newton.html">Método de Newton</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/frac-koch.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Interpolación polinomial</h2>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Introducción</label></h3>
+          <div class="hidden">
+            <p>
+              La interpolación es la técnica de estimar el valor de una función para cualquier valor intermedio de la
+              variable
+              independiente. Es decir, denota el método de calcular el valor de la función <var>y = f(x)</var> para
+              cualquier valor
+              dado de la variable independiente <var>x</var> cuando se conoce o se da un conjunto de valores de <var>y =
+                f(x)</var>
+              para ciertos valores de <var>x</var>.
+            </p>
+            <p>
+              Por lo tanto, si (<var>x<sub>i</sub>, y<sub>i</sub></var>), <var>i = 0, . . . ,n</var> son el conjunto de
+              (<var>n + 1</var>) datos de la función <var>y = f(x)</var>, entonces el proceso de encontrar el valor de
+              <var>y</var>
+              correspondiente a cualquier valor de <var>x</var> entre <var>x<sub>0</sub></var> y
+              <var>x<sub>n</sub></var>,
+              se llama interpolación.
+            </p>
+            <p>
+              Si se conoce explícitamente la función <var>f(x)</var>, entonces puede obtenerse fácilmente el valor de
+              <var>y</var>
+              correspondiente a cualquier valor de <var>x</var>. Por otra parte, si la función <var>f(x)</var> no se
+              conoce, entonces
+              es muy difícil encontrar la forma exacta de <var>f(x)</var> con los valores tabulados (<var>x<sub>i</sub>,
+                y<sub>i</sub></var>). En tales casos, la función <var>f(x)</var> puede ser sustituida por una función
+              más simple,
+              digamos, <var>&phi; (x)</var>, que tiene los mismos valores que <var>f(x)</var> para <var>x<sub>0</sub>,.
+                . . , x<sub>n</sub></var>.
+              La función <var>&phi;(x)</var> se denomina función de interpolación o suavizado y cualquier otro valor
+              puede ser calculado a
+              partir de <var>&phi;(x)</var>.
+            </p>
+            <p>
+              Si <var>&phi;(x)</var> es un polinomio, entonces <var>&phi;(x)</var> se llama el polinomio interpolador y
+              el proceso
+              de cálculo de los valores intermedios de <var>y = f(x)</var> se llama la interpolación polinómica.
+            </p>
+            <p>
+              El objetivo de la interpolación polinomial es entonces intentar reconstruir la función desconocida
+              <var>f</var> buscando un polinomio <var>P<sub>n</sub></var> cuya gráfica en el plano <var>(x, y)</var>
+              pasa a través de los puntos con coordenadas
+              <var>(x<sub>i</sub>, f(x<sub>i</sub>))</var>, <var>i = 0, . . . ,n</var>. Sin embargo, en general, el
+              polinomio resultante <var>P<sub>n</sub></var> será
+              diferente de <var>f</var> (a menos que <var>f</var> sea un polinomio del mismo grado que
+              <var>P<sub>n</sub></var>), por lo que se incurrirá en un error. En este capítulo también estableceremos
+              resultados que proporcionan límites sobre el tamaño de este error.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: none;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: block;">
+              <ul>
+                <li><a class="select" href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

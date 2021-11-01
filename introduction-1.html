@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="fabio" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Ecuaciones no lineales</h2>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Introducción</label></h3>
+          <div class="hidden">
+            <p>Un problema clásico del álgebra ordinaria es encontrar la raíz de la ecuación <var>f(x) = 0</var>.
+              Es decir, si la función se define como <var>y = f(x)</var>, buscamos el valor <var>a</var> tal que
+            </p>
+            <div class="equation">
+              f(a) = 0.
+            </div>
+            <p>La terminología exacta es que <var>a</var> es un cero de la función, o una raíz de la ecuación <var>f(x)
+                = 0</var>. Observe que todavía no hemos
+              especificado qué tipo de función es <var>f</var>. El caso más obvio es cuando <var>f</var> es una función
+              real de una sola variable real <var>x</var>, pero también podemos
+              considerar el problema cuando <var>f</var> es una función vectorial de una variable de valor vectorial, en
+              cuyo caso la expresión anterior es un sistema
+              de ecuaciones.
+            </p>
+            <p>Ahora, volviendo a la función <var>f</var>, supongamos que <var>f</var> es un polinomio, el caso más
+              simple es la ecuación lineal <var>ax + b = 0</var>,
+              donde <var>a</var> y <var>b</var> son números reales y <var>a &ne; 0</var>, analíticamente la solución
+              viene dada por la fórmula <var>x = -a&#47;b;</var>. Muchas ecuaciones, sin embargo, no son lineales: un
+              ejemplo simple es el polinomio cuadrático <var>ax<sup>2</sup> + bx + c = 0</var>, con coeficientes reales
+              <var>a</var>, <var>b</var>, <var>c</var> con <var>a &ne; 0</var>. Las dos soluciones de esta ecuación, se
+              encuentran en términos de los coeficientes del polinomio a partir de las fórmulas
+            </p>
+            <div class="equation">
+              x<sub>1</sub> =
+              <div class="fraction">
+                <span class="numerator">-b + <span class="radical">&radic;</span><span class="radical-end">b<sup>2</sup>
+                    - 4ac</span></span>
+                <hr />
+                <span class="denominator">2a</span>
+              </div>,&nbsp;
+              x<sub>2</sub> =
+              <div class="fraction">
+                <span class="numerator">-b - <span class="radical">&radic;</span><span class="radical-end">b<sup>2</sup>
+                    - 4ac</span></span>
+                <hr />
+                <span class="denominator">2a</span>
+              </div>.
+            </div>
+            <p>Ahora, para la solución de ecuaciones polinómicas cúbicas y cuárticas tenemos que recurrir a las fórmulas
+              más complejas desarrolladas por los matemáticos
+              italianos del siglo XVI Niccolo Fontana Tartaglia (1499-1557) y Lodovico Ferrari (1522-1565),
+              respectivamente. En cualquier caso, para una ecuación polinomial general de grado <var>n &ge; 5</var>, no
+              existe una fórmula cerrada que proporcione una solución que pueda ser resuelta en términos de radicales;
+              Como por ejemplo, <var>x<sup>5</sup> - 4x - 2 = 0</var>.</p>
+
+            <p>Puesto que no existe una fórmula general para la solución de las ecuaciones polinómicas, no existirá
+              fórmula general para la solución de una ecuación
+              arbitraria no lineal de la forma <var>f(x) = 0</var>, donde <var>f</var> es una función continua de valor
+              real. ¿Cómo podemos entonces decidir si tal ecuación posee o no una
+              solución en el conjunto de los números reales, y cómo podemos encontrar una solución?
+            </p>
+            <p>El presente apartado se dedica al estudio de estas cuestiones. Nuestro objetivo es desarrollar métodos
+              numéricos simples para la solución aproximada de
+              la ecuación <var>f(x) = 0</var> donde <var>f</var> es una función de valor real, definida y continua en un
+              intervalo acotado y cerrado de la línea real. Los diferentes métodos discutidos aquí son de naturaleza
+              iterativa y producen secuencias de números reales que, en circunstancias favorables, convergen a la
+              solución requerida.
+            </p>
+            <p>Gráficamente, una solución, o una raíz, de la ecuación se refiere al punto de intersección de
+              <var>f(x)</var> y el eje <var>x</var>. Por lo tanto,
+              dependiendo de la naturaleza de la curva de <var>f(x)</var> en relación con el eje <var>x</var>, la
+              ecuación puede tener una única solución,
+              soluciones múltiples o ninguna solución. A veces se puede determinar una raíz de una ecuación
+              analíticamente dando como resultado una solución exacta.
+              Por ejemplo, la ecuación <var>2x - 3 = 0</var> puede resolverse analíticamente y obtener una única
+              solución <var>x = 3/2</var>. En la mayoría de las situaciones, sin embargo,
+              esto no es posible y las raíces deben ser encontradas usando un procedimiento numérico. Un ejemplo sería
+              la ecuación <var>1 - x + sen(x) = 0</var>.
+              La figura 1, muestra que esta ecuación tiene una sola solución, ligeramente menor que 2, que puede
+              aproximarse a una precisión deseada con la ayuda de un método numérico.</p>
+            <p>En este apartado sólo consideramos el caso simple en el que <var>f</var> es una función real de una sola
+              variable real. Vamos a discutir por mencionar
+              algunos métodos básicos para encontrar el punto <var>a</var>: el método de bisección, el método de Newton,
+              el método secante, etc.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a class="select" href="introduction-1.html">Introducción</a></li>
+                <li><a href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="secondary">
+          <figure>
+            <img src="img/intro1" alt="interpolation" style="width:300px">
+            <figcaption>Figura 1 - La función interseca al eje <var>x</var> cerca del punto 2.</figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

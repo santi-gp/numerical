@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Método Bisección</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="bisection">
+            <div>
+              <label> <var>f(x)</var></label>
+              <input id="f" name="f" type="text" placeholder="x**3+4*x**2-10" onkeyup="pass_value('f');" />
+            </div>
+            <div>
+              <small id="error0"></small>
+            </div>
+            <div>
+              <label> <var>a</var></label>
+              <input id="x0" name="x0" type="text" placeholder="1" onkeyup="pass_value('x0');" />
+            </div>
+            <div>
+              <small id="error1"></small>
+            </div>
+            <div>
+              <label> <var>b</var></label>
+              <input id="x1" type="text" placeholder="4" onkeyup="pass_value('x1');" />
+            </div>
+            <div>
+              <small id="error2"></small>
+            </div>
+            <div>
+              <label> <var>tol</var></label>
+              <input id="tol" name="tol" type="text" placeholder="0.0001" onkeyup="pass_value('tol');" />
+            </div>
+            <div>
+              <small id="error3"></small>
+            </div>
+            <div class="row-group">
+              <input value="Calcular" onclick="root_bisection('x',f.value);" type="button" />
+            </div>
+          </form>
+        </section>
+        <section id="result">
+          <h6>&nbsp;</h6>
+          <span id="demo"></span>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Descripción</label></h3>
+          <div class="hidden">
+            <p>La bisección es una idea maravillosamente sencilla que se basa en poco más que la continuidad de la
+              función <var>f</var>.</p>
+            <p>Supongamos que sabemos que <var>f(a)f(b) &lt; 0</var> en el intervalo <var>[a,b]</var>. Esto significa
+              que <var>f</var> es negativa en un punto y positiva en el
+              otro. El teorema del valor intermedio para funciones continuas implica que existe un número <var>p</var>
+              en <var>(a,b)</var> con <var>f(p) = 0</var>. Aunque el procedimiento funciona cuando hay más de una raíz
+              en el
+              intervalo <var>(a,b)</var>, asumimos por simplicidad, que la raíz en este intervalo es única.</p>
+            <p>El método pide una reducción a la mitad repetida de subintervalos de <var>[a,b]</var> y, a cada
+              paso, localizar el intervalo que contiene <var>p</var>.</p>
+            <p>Para empezar, sea <var>a<sub>1</sub> = a </var> y <var>b<sub>1</sub> = b</var>, y sea <var>p<sub>1
+                </sub></var> el punto medio de
+              <var>[a, b]</var> ; es decir,
+            </p>
+            <div class="equation">
+              p<sub>1</sub> =
+              <div class="fraction">
+                <span class="numerator">a<sub>1</sub> + a<sub>2</sub></span>
+                <hr /><span class="denominator">2</span>
+              </div>
+            </div>
+            <p>Si <var>f(p<sub>1</sub>) = 0</var>, entonces <var>p = p<sub>1</sub></var>, y hemos terminado.</p>
+            <p>Si <var>f(p<sub>1</sub>) &ne; 0</var>, entonces <var>f(p<sub>1</sub>)</var> tiene el mismo signo que
+              <var>f(a<sub>1</sub>)</var> o
+              <var>f(b<sub>1</sub>)</var>.
+            </p>
+            <p>- Si <var>f(p<sub>1</sub>)</var> y <var>f(a<sub>1</sub>)</var> tienen el mismo signo,
+              <var>p&in;(p<sub>1</sub>,b<sub>1</sub>)</var>. Hacer
+              <var>a<sub>2</sub> = p<sub>1</sub></var> y <var>b<sub>2</sub> = b<sub>1</sub></var>.
+            </p>
+            <p>- Si <var>f(p<sub>1</sub>)</var> y <var>f(a<sub>1</sub>)</var> tienen signos opuestos,
+              <var>p&in;(a<sub>1</sub>,p<sub>1</sub>)</var>. Hacer
+              <var>a<sub>2</sub> = a<sub>1</sub></var> y <var>b<sub>2</sub> = p<sub>1</sub></var>.
+            </p>
+            <p>A continuación, vuelva a aplicar el proceso para el intervalo <var>[a<sub>2</sub>,b<sub>2</sub>]</var>.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a href="introduction-1.html">Introducción</a></li>
+                <li><a class="select" href="root-bisection.html">Bisección</a></li>
+                <li><a href="root-newton.html">Newton</a></li>
+                <li><a href="root-secant.html">Secante</a></li>
+                <li><a href="root-fixed.html">Punto Fijo</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="introduction-2.html">Introducción</a></li>
+                <li><a href="int-lagrange.html">Lagrange</a></li>
+                <li><a href="int-newton.html">Newton</a></li>
+                <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+                <li><a href="int-nevilles.html">Neville's</a></li>
+                <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3"
+                style="transform:rotate(0deg);">&#9660;</i></dt>
+            <dd id="smenu3" style="display: none;">
+              <ul>
+                <li><a href="introduction-3.html">Introducción</a></li>
+                <li><a href="intg-trapeze.html">Trapecio</a></li>
+                <li><a href="intg-simpson.html">Simpson</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu4" style="display: none;">
+              <ul>
+                <li><a href="introduction-4.html">Introducción</a></li>
+                <li><a href="edo-euler.html">Método de Euler</a></li>
+                <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+                <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu5" style="display: none;">
+              <ul>
+                <li><a href="introduction-5.html">Introducción</a></li>
+                <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+                <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+                <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+                <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="secondary">
+          <figure>
+            <img src="img/bisection.png" width="430" height="395" alt="Bisección" />
+            <figcaption>
+              Bisección
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/validate_root.js"></script>
+  <script src="js/root-bisection.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="richi" />
+<meta name="description" content="Métodos Númericos y Fractales" />
+<meta name="keywords" content="javascript, css, html5" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="css/styles.css" type="text/css" rel="stylesheet" />
+<link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+<link href="css/fonts.css" type="text/css" rel="stylesheet" />
+<script src="js/nav-responsive.js"></script>
+<script src="js/nav-accordion.js"></script>
+<title>Matemáticas con Javascript</title>
+</head>
+<body>
+<div id="wrapper">
+ <header id="main-header">
+  <span class="logo-site"><i class="icon-logo"></i></span>
+  <div class="name-site">
+   <h1>Métodos Númericos</h1>
+   <h2>y Fractales</h2>
+  </div>
+  <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+ </header>
+ <nav id="main-nav">
+  <ul>
+	<li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+	<li><a class="active" href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+	<li><a href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+	<!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+  </ul>
+ </nav>
+ <div id="content">
+  <article>
+   <h2>Ecuaciones diferenciales ordinarias</h2>  
+   <section>
+    <input type="checkbox" name="group" id="option-1" />
+    <h3><label for="option-1">Introducción</label></h3> 
+    <div class="hidden">
+   <p>La mayoría de las leyes físicas de la ciencia y la ingeniería se expresan en términos de ecuaciones diferenciales. 
+    Una ecuación diferencial es una ecuación que implica al menos una derivada de alguna función desconocida.</p>
+    
+    <p>Aquí nos ocupamos del problema de resolver numéricamente ecuaciones diferenciales. Nos concentramos en el llamado
+     problema de valor inicial (PVI). Es decir, encontrar una función <var>y(t)</var> tal que </p>
+     <div class="equation">
+    y '&equals; f(t,y(t)),&nbsp; y(t<sub>0</sub>)&equals;y<sub>0</sub>,
+    </div>
+    <p>donde <var>f</var> es una función conocida de dos variables, y <var>t<sub>0</sub></var> y <var>y<sub>0</sub></var> son valores conocidos. 
+    Esto se llama el problema de valor inicial porque (como la notación sugiere) podemos ver la variable independiente 
+    <var>t</var> como el tiempo, y la ecuación como el modelo de un proceso que se mueve hacia adelante desde algún 
+    tiempo inicial <var>t<sub>0</sub></var> con el estado inicial <var>y<sub>0</sub></var>.
+    </p>    
+    <p>Afortunadamente, existen muchos y buenos métodos para resolver el problema de valor inicial. Los métodos 
+    que presentaremos aquí servirán para introducir la idea básica de la mayoría de los otros métodos y pueden aplicarse
+     fácilmente a sistemas de ecuaciones simultáneas de primer orden.</p>
+    </div>
+   </section>
+  </article>
+  <aside>
+   <div class="secondary">
+   <dl id="accordion">
+   <dt onclick="javascript:show('smenu1','img1');">Solución de ecuaciones no lineales<i id="img1" style="transform:rotate(0deg);">&#8711;</i></dt>
+   <dd id="smenu1" style="display: none;">
+    <ul>
+     <li><a href="introduction-1.html">Introducción</a></li>
+     <li><a href="root-bisection.html">Bisección</a></li>
+     <li><a href="root-newton.html">Newton</a></li>
+     <li><a href="root-secant.html">Secante</a></li>
+     <li><a href="root-fixed.html">Punto Fijo</a></li>
+    </ul>
+   </dd>
+   <dt onclick="javascript:show('smenu2','img2');">Interpolación polinomial<i id="img2" style="transform:rotate(0deg);">&#8711;</i></dt>
+   <dd id="smenu2" style="display: none;">
+    <ul>
+     <li><a href="introduction-2.html">Introducción</a></li>
+     <li><a href="int-lagrange.html">Lagrange</a></li>
+     <li><a href="int-newton.html">Newton</a></li>
+     <!--<li><a href="int-hermite.html">Hermite</a></li>-->
+     <li><a href="int-nevilles.html">Neville's</a></li>
+     <!--<li><a href="int-spline.html">Spline Cubic</a></li>-->
+    </ul>
+   </dd>
+   <dt onclick="javascript:show('smenu3','img3');">Integración numérica<i id="img3" style="transform:rotate(0deg);">&#8711;</i></dt>
+   <dd id="smenu3" style="display: none;">
+    <ul>
+     <li><a class="select" href="introduction-3.html">Introducción</a></li>
+     <li><a href="intg-trapeze.html">Trapecio</a></li>
+     <li><a href="intg-simpson.html">Simpson</a></li>
+    </ul>
+   </dd>
+   <dt onclick="javascript:show('smenu4','img4');">Ecuaciones diferenciales ordinarias<i id="img4" style="transform:rotate(180deg);">&#8711;</i></dt>
+   <dd id="smenu4" style="display: block;">
+    <ul>
+     <li><a class="select" href="introduction-4.html">Introducción</a></li>
+     <li><a href="edo-euler.html">Método de Euler</a></li>
+     <li><a href="edo-runge.html">Método de Runge-Kutta</a></li>
+     <li><a href="edo-runge4.html">Runge-Kutta 3<sup>r</sup> y 4<sup>o</sup> orden</a></li>
+    </ul>
+   </dd>
+   <dt onclick="javascript:show('smenu5','img5');">Solución de sistemas lineales<i id="img5" style="transform:rotate(0deg);">&#8711;</i></dt>
+   <dd id="smenu5" style="display: none;">
+    <ul>
+     <li><a href="introduction-5.html">Introducción</a></li>
+     <li><a href="ssl-gauss.html">Eliminación Guassiana</a></li>
+     <li><a href="ssl-factorisation.html">Factorización LU</a></li>
+     <!--<li><a href="ssl-pivoting.html">Pivoteo</a></li>-->
+     <!--<li><a href="ssl-least-squares.html">Mínimos cuadrados</a></li>-->
+    </ul>
+   </dd>
+  </dl>
+  </div>
+  </aside>
+ </div>
+ <footer id="main-footer">
+  <div class="footer-nav">
+   <a href="index.html">Inicio</a>
+   <a href="numerical.html">Métodos Numéricos</a>
+   <a href="fractals.html">Fractales</a>
+   <!--<a href="projects.html">Proyectos</a>-->
+  </div>
+  <div class="contact">
+   <h5>CONTACTO</h5>
+   <address>
+    <p><i class="icon-phone"></i></p>
+    <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+   </address>
+  </div>
+  <div class="copyright">
+   <p>Copyright &copy;</p>
+  </div>
+ </footer>
+</div>
+</body>
+</html>

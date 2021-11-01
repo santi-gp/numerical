@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="fabio" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a class="active" href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Fractales</h2>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Definición</label></h3>
+          <div class="hidden">
+            <p>Un fractal es una figura geométrica complicada que, a diferencia de una figura complicada convencional,
+              no simplifica cuando se magnifica. El término "fractal" fue acuñado en la década de 1960 por B.
+              Mandelbrot, un matemático de la IBM.</p>
+            <p>En general se reconoce que los fractales tienen algunas o todas de las siguientes propiedades:</p>
+            <ol>
+              <li>Posee detalle a todas las escalas de observación.</li>
+              <li>No es posible describirlo con geometría Euclidiana, tanto local como globalmente.</li>
+              <li>Posee alguna clase de auto-semejanza, posiblemente estadística.</li>
+              <li>Su dimensión fractal es mayor que su dimensión topológica.</li>
+              <li>El algoritmo que sirve para describirlo es muy simple, y posiblemente de carácter recursivo.</li>
+            </ol>
+            <p>Vamos a exponer y analizar estos propiedades para varios ejemplos de fractales. Quizás el objeto
+              geométrico
+              simple que merece ser llamado un fractal es el conjunto de Cantor.</p>
+          </div>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-2" />
+          <h3><label for="option-2">Dimensión Fractal</label></h3>
+          <div class="hidden">
+            <p>Supongamos que el conjunto auto-semejante <var>S</var> puede ser subdividido en <var>K</var> piezas
+              congruentes,
+              cada uno de los cuales puede ser aumentado por una constante <var>M</var> para obtener todo el conjunto
+              <var>S</var>.
+              Entonces la dimensión fractal <var>D</var> de <var>S</var> es</p>
+            <div class="equation">
+              D = <div class="fraction">
+                <span>log(K)</span>
+                <hr /><span>log(M)</span>
+              </div> =
+              <div class="fraction">
+                <span>log(# de piezas)</span>
+                <hr /><span>log(factor magnificador)</span>
+              </div>.
+            </div>
+          </div>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-3" />
+          <h3><label for="option-3">Tipos de Fractales</label></h3>
+          <div class="hidden">
+            <h4>Lineales</h4>
+            <p>Son aquellos que se construyen con un simple cambio en la variación de sus escalas. Esto
+              implica algo muy importante, los fractales lineales son exactamente idénticos en todas sus
+              escalas hasta el infinito. Además pueden obtenerse mediante trazados geométricos simples.
+              Ejemplos de ellos son: el triángulo de Sierpinski, el conjunto de Cantor, la curva de Koch, etc.</p>
+            <h4>No lineales</h4>
+            <p>Son aquellos que se generan a partir de distorsiones complejas o justamente como lo
+              dice su nombre, y usando un término proveniente de la matemática Caótica, distorsiones no
+              lineales. La mayoría de los objetos fractales puramente matemáticos y naturales son no
+              lineales. Ejemplos de ellos son: el Conjunto de Mandelbrot.</p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Fractales Lineales<i id="img1"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: block;">
+              <ul>
+                <li><a href="frac-cantor.html">Cantor</a></li>
+                <li><a href="frac-koch.html">Von Koch</a></li>
+                <li><a href="frac-sierpinski.html">Sierpinski</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Fractales no Lineales<i id="img2"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: none;">
+              <ul>
+                <li><a href="frac-julia.html">Conjunto de Julia</a></li>
+                <li><a href="frac-mandelbrot.html">Conjunto de Mandelbrot</a></li>
+                <li><a href="frac-newton.html">Método de Newton</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

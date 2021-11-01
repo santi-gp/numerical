@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="fabio" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a class="active" href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Conjunto de Mandelbrot</h2>
+        <section>
+          <h3>Programa</h3>
+          <form action="mandelbrot">
+            <input type="button" value="Dibujar" onclick="set_mandelbrot();" />
+          </form>
+          <canvas id="mandelbrot" width="360" height="240"></canvas>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">Definición</label></h3>
+          <div class="hidden">
+            <p>El conjunto de Mandelbrot <var>M</var> esta compuesto por todos los valores <var>c</var> para el cual el
+              lleno del conjunto de Julia <var>K<sub>c</sub></var> es
+              acotado, es decir,</p>
+            <div class="equation">
+              M = {c &in; C / Q<sub>c</sub><sup>n</sup>(0) &nrarr; &infin; }
+            </div>
+            <p>donde <var>c</var> es una constante compleja llamada parámetro.</p>
+            <p>La Dicotomía Fundamental indica que existen 2 tipos básicos de conjuntos Llenos de Julia para
+              <var>f<sub>c</sub></var>, aquellos que son
+              conexos y otros compuestos por infinitos componentes disjuntos. Además es la órbita de 0 la que determina
+              estos 2 casos.
+            </p>
+            <p>Como antes le animamos a experimentar viendo diferentes regiones de <var>M</var>. Usted verá rápidamente
+              que el conjunto de Mandelbrot es uno de los objetos más fantásticos en la matemáticas. Intentemos entender
+              que significa esta región.</p>
+            <p>Supongamos que <var>Q<sub>c</sub></var> tiene un punto periódico atractivo de algún periodo. Entonces la
+              cuenca
+              entera de atracción de este punto se encuentra en <var>K<sub>c</sub></var>, y así el lleno del conjunto de
+              Julia
+              no es un conjunto de Cantor. Por nuestra discusión anterior, esto significa que <var>c</var> debería estar
+              en el
+              conjunto de Mandelbrot. La pregunta es ¿Dónde?.</p>
+            <p>Para responder esto, primero se determina el conjunto de valores de <var>c</var> para el cual
+              <var>Q<sub>c</sub></var>
+              tiene un punto fijo atractivo o un punto fijo neutral. Denotemos este conjunto por
+              <var>C<sub>1</sub></var> y supongamos que <var>z<sub>c</sub></var>
+              representa el punto fijo correspondiente a <var>Q<sub>c</sub></var> cuando <var>c &in;
+                C<sub>1</sub></var>.
+              Entonces <var>z<sub>c</sub></var> debería satisfacer el siguiente par de ecuaciones:
+            <div class="equation">
+              Q<sub>c</sub>(z) = z<sup>2</sup> + c = z <br />
+              &#124;Q'<sub>c</sub>(z)&#124; = &#124;z&#124; &le; 1.
+            </div>
+            <p>La segunda ecuación afirma que <var>z<sub>c</sub></var> en el interior del disco acotado por el círculo
+              de
+              radio <var>1/2</var>. En este círculo <var>&#124;Q'<sub>c</sub>(z)&#124;=1</var>, <var>z<sub>c</sub></var>
+              es
+              un punto fijo neutral. Si escribimos este círculo como <var>z = &frac12;e<sup>i&theta;</sup></var>,
+              entonces
+              de la primera ecuación encontramos que los valores de <var>c</var> para el cual <var>Q<sub>c</sub></var>
+              tiene un
+              punto fijo neutral se encuentran en la curva dada por;</p>
+            <div class="equation">
+              c = &xi;(&theta;) =
+              <div class="fraction">
+                <span>1</span>
+                <hr /><span>2</span>
+              </div>e<sup>i&theta;</sup> -
+              <div class="fraction">
+                <span>1</span>
+                <hr /><span>4</span>
+              </div>e<sup>2i&theta;</sup>.
+            </div>
+            <p>Esta curva es la cardioide descrita en la figura 17.9. Da la frontera de la región grande negra visible
+              en la figura 17.3. el interior de esta región es el conjunto de los valores <var>c</var> para el cual
+              <var>Q<sub>c</sub></var> tiene un punto fijo atractivo.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Fractales Lineales<i id="img1"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: none;">
+              <ul>
+                <li><a href="frac-cantor.html">Cantor</a></li>
+                <li><a href="frac-koch.html">Von Koch</a></li>
+                <li><a href="frac-sierpinski.html">Sierpinski</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Fractales no Lineales<i id="img2"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: block;">
+              <ul>
+                <li><a href="frac-julia.html">Conjunto de Julia</a></li>
+                <li><a class="select" href="frac-mandelbrot.html">Conjunto de Mandelbrot</a></li>
+                <li><a href="frac-newton.html">Método de Newton</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/set-mandelbrot.js"></script>
+</body>
+
+</html>

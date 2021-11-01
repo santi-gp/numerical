@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="richi" />
+  <meta name="description" content="Métodos Númericos y Fractales" />
+  <meta name="keywords" content="javascript, css, html5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/styles.css" type="text/css" rel="stylesheet" />
+  <link href="css/styles-responsive.css" type="text/css" rel="stylesheet" />
+  <link href="css/fonts.css" type="text/css" rel="stylesheet" />
+  <title>Matemáticas con Javascript</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="main-header">
+      <span class="logo-site"><i class="icon-logo"></i></span>
+      <div class="name-site">
+        <h1>Métodos Númericos</h1>
+        <h2>y Fractales</h2>
+      </div>
+      <span class="nav-bar"><i onclick="menu();" class="icon-bar"></i> </span>
+    </header>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="icon-home"></i>Inicio</a></li>
+        <li><a href="numerical.html"><i class="icon-numerical"></i>Métodos Numéricos</a></li>
+        <li><a class="active" href="fractals.html"><i class="icon-fractal"></i>Fractales</a></li>
+        <!--<li><a href="projects.html"><i class="icon-project"></i>Proyectos</a></li>-->
+      </ul>
+    </nav>
+    <div id="content">
+      <article>
+        <h2>Conjuntos de Julia</h2>
+        <section>
+          <h3>Programa</h3>
+          <form class="frac_julia" action="julia">
+            <fieldset>
+              <var>c = </var>
+              <input type="text" id="cx" placeholder="0" />
+              <span>&#43;</span>
+              <input type="text" id="cy" placeholder="-1" />
+              <var>i</var>
+            </fieldset>
+            <div class="row-group">
+              <input type="button" value="Dibujar" onclick="set_julia();" />
+            </div>
+          </form>
+          <canvas id="julia" width="360" height="240"></canvas>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-1" />
+          <h3><label for="option-1">introducción</label></h3>
+          <div class="hidden">
+            <p>Los conjuntos de Julia son ciertos conjuntos fractales en el plano complejo que surgen de la dinámica
+              de polinomios complejos. Estas notas dan una breve introducción a los conjuntos de Julia y explorar
+              algunas de sus propiedades básicas.</p>
+            <p>Un caso especial de estos fractales se construyen a partir de la iteración de la familia cuadrática</p>
+            <div class="equation">
+              Q<sub>c</sub> = z<sup>2</sup> + c
+            </div>
+            <p> donde <var>Q</var> es un polinomio de variable compleja y <var>c</var> es una constante compleja.</p>
+          </div>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-2" />
+          <h3><label for="option-2">Caso <var>c = 0</var></label></h3>
+          <div class="hidden">
+            <p>Como ejemplo más simple, veamos cuando <var>Q<sub>c</sub> = z<sup>2</sup></var>, de manera que
+              <var>Q<sup>k</sup>(z) = z<sup>2<sup>k</sup></sup></var>.
+              Claramente <var>Q<sup>k</sup>(z) &rarr; 0</var> cuando <var>k &rarr; &infin;</var> si <var>|z|&lt;1</var>
+              y <var>Q<sup>k</sup>(z) &rarr; &infin;</var>
+              cuando <var>k &rarr; &infin;</var> si <var>|z|&gt;1</var>, por último <var>Q<sup>k</sup>(z)</var>
+              permanece en el círculo <var>|z| = 1</var> para todo
+              <var>k</var> si <var>|z| = 1</var>. Por lo tanto, el lleno del conjunto de Julia <var>K(Q)</var> es el
+              disco unitario <var>|z|&lt;1</var>, y el conjunto de
+              Julia <var>J(Q)</var> es su frontera, el círculo unitario, <var>|z|=1</var>. El conjunto de Julia
+              <var>J(Q)</var> es la frontera entre los conjuntos
+              de puntos que iteran a 0 y <var>&infin;</var>. Por supuesto, en este caso especial <var>J</var> no es un
+              fractal.
+            </p>
+          </div>
+        </section>
+        <section>
+          <input type="checkbox" name="group" id="option-3" />
+          <h3><label for="option-3">Definición</label></h3>
+          <div class="hidden">
+            <p>Definimos el conjunto lleno de Julia del polinomio <var>Q<sub>c</sub></var>, como</p>
+            <div class="equation">
+              K(Q) = {z &in; C / Q<sub>c</sub><sup>k</sup>(z) &rarr; &infin;}.
+            </div>
+            <p>Por lo tanto, el conjunto de Julia de <var>Q<sub>c</sub></var> se define como la frontera del conjunto
+              lleno de Julia, <var>J(Q<sub>c</sub>) = &part; K(Q<sub>c</sub>)</var>.</p>
+            <p>Así, <var>z &in; J(Q<sub>c</sub>)</var> si en cada vecindad de <var>z</var> existen puntos <var>w</var> y
+              <var>v</var> con <var>Q<sub>c</sub><sup>k</sup>(w) &rarr; &infin;</var> y
+              <var>Q<sub>c</sub><sup>k</sup>(w) &nrarr; &infin;</var>.
+            </p>
+          </div>
+        </section>
+      </article>
+      <aside>
+        <div class="secondary">
+          <dl id="accordion">
+            <dt onclick="javascript:show('smenu1','img1');">Fractales Lineales<i id="img1"
+                style="transform:rotate(0deg);">&#8711;</i></dt>
+            <dd id="smenu1" style="display: none;">
+              <ul>
+                <li><a href="frac-cantor.html">Cantor</a></li>
+                <li><a href="frac-koch.html">Von Koch</a></li>
+                <li><a href="frac-sierpinski.html">Sierpinski</a></li>
+              </ul>
+            </dd>
+            <dt onclick="javascript:show('smenu2','img2');">Fractales no Lineales<i id="img2"
+                style="transform:rotate(180deg);">&#8711;</i></dt>
+            <dd id="smenu2" style="display: block;">
+              <ul>
+                <li><a class="select" href="frac-julia.html">Conjunto de Julia</a></li>
+                <li><a href="frac-mandelbrot.html">Conjunto de Mandelbrot</a></li>
+                <li><a href="frac-newton.html">Método de Newton</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <footer id="main-footer">
+      <div class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="numerical.html">Métodos Numéricos</a>
+        <a href="fractals.html">Fractales</a>
+        <!--<a href="projects.html">Proyectos</a>-->
+      </div>
+      <div class="contact">
+        <h5>CONTACTO</h5>
+        <address>
+          <p><i class="icon-phone"></i></p>
+          <a href="rguevaraponce@gmail.com"><i class="icon-envelop"></i>rguevaraponce@gmail.com</a>
+        </address>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy;</p>
+      </div>
+    </footer>
+  </div>
+  <script src="js/nav-responsive.js"></script>
+  <script src="js/nav-accordion.js"></script>
+  <script src="js/set-julia.js"></script>
+</body>
+
+</html>

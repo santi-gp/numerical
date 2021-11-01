@@ -1,0 +1,123 @@
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+
+    /*Style main*/
+    body {
+        font-size: 80%;
+    }
+
+    #wrapper {
+        margin: 0;
+        width: 100%;
+        border: 0;
+        box-sizing: border-box;
+    }
+
+    #content h2 {
+        font-size: 1.25em;
+    }
+
+    #content h3 {
+        font-size: 1.05em;
+    }
+
+    #content h4 {
+        font-size: 1em;
+    }
+
+    #content section {
+        margin: .5% 2%;
+    }
+
+    #content {
+        flex-direction: column;
+    }
+
+    article,
+    aside {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: block;
+    }
+
+    .name-site {
+        text-align: center;
+    }
+
+    article {
+        padding-top: 2%;
+    }
+
+    #main-nav {
+        width: 66.67%;
+        position: fixed;
+        left: -100%;
+        top: 0;
+    }
+
+    #main-nav li {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #fff;
+    }
+
+    #main-nav a {
+        text-align: left;
+        padding-left: 5%;
+    }
+
+    form {
+        width: 90%;
+    }
+
+    #main-footer {
+        padding: 0 2%;
+    }
+
+    .footer-nav,
+    .contact {
+        display: block;
+        margin: 1% 0;
+        width: 100%;
+    }
+
+    .contact {
+        border-top: 1px solid #fff;
+        padding: 1% 0;
+    }
+
+    section h3>label {
+        display: block;
+        cursor: pointer;
+        line-height: 1.75;
+        padding: 0 1%;
+        background-color: #342545;
+        color: #fff;
+    }
+
+    section h3>label::after {
+        float: right;
+        content: "+";
+    }
+
+    section .hidden {
+        display: none;
+    }
+
+    section input:checked~.hidden {
+        display: block;
+    }
+
+    section input:checked+h3 label::after {
+        content: "-";
+    }
+
+    .icon-bar {
+        display: block;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1.25em;
+    }
+
+    /*-------------------------------*/
+}
