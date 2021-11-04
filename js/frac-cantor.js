@@ -1,23 +1,47 @@
-function cantor(cv, n, a, b) {
+/*function cantor(cv, n, a, b) {
 	if (n == 0) {
 		cv.beginPath();
 		cv.moveTo(a[0], a[1]);
 		cv.lineTo(b[0], b[1]);
 		cv.closePath();
 		/*cv.fillStyle('green');*/
-		/*cv.fill();*/
-		cv.strokeStyle = "#342545";
-		cv.lineWidth = 2.0;
+/*cv.fill();*/
+/*	cv.strokeStyle = "#342545";
+	cv.lineWidth = 2.0;
+	cv.stroke();
+} else {
+	var u = new Array(a[0], a[1] + 25);
+	var v = new Array(b[0], b[1] + 25);
+	var c = new Array(u[0] + (v[0] - u[0]) / 3.0,
+		u[1] + (v[1] - u[1]) / 3.0);
+	var d = new Array(v[0] - (v[0] - u[0]) / 3.0,
+		v[1] - (v[1] - u[1]) / 3.0);
+	cantor(cv, n - 1, u, c);
+	cantor(cv, n - 1, d, v);
+}
+}*/
+function cantor(cv, x1, y1, long, n) {
+	var iter = parseInt(document.getElementById("nivel").value);
+	if (n == 0) {
+		cv.beginPath();
+		cv.moveTo(0, 10);
+		cv.lineTo(300, 10);
+		cv.lineWidth = 4.0;
 		cv.stroke();
-	} else {
-		var u = new Array(a[0], a[1] + 25);
-		var v = new Array(b[0], b[1] + 25);
-		var c = new Array(u[0] + (v[0] - u[0]) / 3.0,
-			u[1] + (v[1] - u[1]) / 3.0);
-		var d = new Array(v[0] - (v[0] - u[0]) / 3.0,
-			v[1] - (v[1] - u[1]) / 3.0);
-		cantor(cv, n - 1, u, c);
-		cantor(cv, n - 1, d, v);
+	}
+	else {
+		var long = long / 3.0;
+		var x2 = x1 + 1.0 * long;
+		var x3 = x1 + 2.0 * long;
+		var x4 = x1 + 3.0 * long;
+
+		cv.moveTo(x1, iter * 20 - (n - 1) * 20);
+		cv.lineTo(x2, iter * 20 - (n - 1) * 20);
+		cv.moveTo(x3, iter * 20 - (n - 1) * 20);
+		cv.lineTo(x4, iter * 20 - (n - 1) * 20);
+		cv.stroke();
+		cantor(cv, x1, iter * 20 - (n - 1) * 20, long, n - 1);
+		cantor(cv, x3, iter * 20 - (n - 1) * 20, long, n - 1);
 	}
 }
 
@@ -89,9 +113,10 @@ function draw() {
 
 		switch (fractal) {
 			case "Conjunto de Cantor":
-				var x = new Array(05, 50);
+				/*var x = new Array(05, 50);
 				var y = new Array(285, 50);
-				cantor(cv, iteraciones, x, y);
+				cantor(cv, iteraciones, x, y);*/
+				cantor(cv, 0, 0, 300, iteraciones);
 				break;
 			case "Triángulo de Cantor":
 				var a = new Array(05, 285);
